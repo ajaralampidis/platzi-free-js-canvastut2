@@ -18,6 +18,26 @@ let y = 150;
 //Activa la funcion para dibujar when se apreta una tecla.
 document.addEventListener("keydown", dibujarTeclado);
 
+
+cuadrito.addEventListener("click", dibuarMouse);
+function dibuarMouse()
+{
+    cuadrito.addEventListener("mousemove", mouse);
+    function mouse(evento) 
+    {
+        let colorcito = "red"
+        let movimiento = 1;
+        let mousePositionX = evento.offsetX;
+        let mousePositionY = evento.offsetY;
+        console.log(mousePositionX);
+
+
+        dibujarLinea(colorcito, x, y, mousePositionX, mousePositionY, context);
+        x = mousePositionX
+        y = mousePositionY
+    };
+};
+
 //Función de trazo usada en el switch de la funcion dibujar. El switch solo se activa con tecla = flechas
 function dibujarLinea(color, xi, yi, xf, yf, lienzo)
 {
