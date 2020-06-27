@@ -14,37 +14,36 @@ let context = cuadrito.getContext("2d");
 //Declara las variables y setea posición inicial para la linea
 let x = 150;
 let y = 150;
+
 let drawCheck = false;
+cuadrito.addEventListener("mousedown", dibujarMouse);
+function dibujarMouse(mouseInit)
+{
+    drawCheck = true;
+    x = mouseInit.offsetX;
+    y = mouseInit.offsetY;
+    cuadrito.addEventListener("mousemove", mouse);
+    function mouse(mouseTrack) 
+    {
+        if (drawCheck === true)
+        {
+            let colorcito = "red";
+            let mousePositionX = mouseTrack.offsetX;
+            let mousePositionY = mouseTrack.offsetY;
+            dibujarLinea(colorcito, x, y, mousePositionX, mousePositionY, context);
+            x = mousePositionX;
+            y = mousePositionY;
+            cuadrito.addEventListener("mouseup", endDrawing);
+            function endDrawing() 
+            {
+                drawCheck = false;
+            };
+        };
+    };
+};
 
 //Activa la funcion para dibujar when se apreta una tecla.
 document.addEventListener("keydown", dibujarTeclado);
-
-
-cuadrito.addEventListener("mousedown", dibuarMouse);
-function dibuarMouse()
-{
-        drawCheck = true;
-        cuadrito.addEventListener("mousemove", mouse);
-        function mouse(evento) 
-        {
-            if (drawCheck === true) 
-            {
-                let colorcito = "red";
-                let movimiento = 1;
-                let mousePositionX = evento.offsetX;
-                let mousePositionY = evento.offsetY;
-                dibujarLinea(colorcito, x, y, mousePositionX, mousePositionY, context);
-                x = mousePositionX;
-                y = mousePositionY;
-
-                cuadrito.addEventListener("mouseup", endDrawing);
-                function endDrawing()
-                {
-                    drawCheck = false;
-                };
-            } else return
-        };
-};
 
 //Función de trazo usada en el switch de la funcion dibujar. El switch solo se activa con tecla = flechas
 function dibujarLinea(color, xi, yi, xf, yf, lienzo)
