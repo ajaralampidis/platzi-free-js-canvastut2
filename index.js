@@ -23,23 +23,23 @@ function dibujarMouse(mouseInit)
     x = mouseInit.offsetX;
     y = mouseInit.offsetY;
     cuadrito.addEventListener("mousemove", mouse);
-    function mouse(mouseTrack) 
+};
+function mouse(mouseTrack) 
+{
+    if (drawCheck === true)
     {
-        if (drawCheck === true)
-        {
-            let colorcito = "red";
-            let mousePositionX = mouseTrack.offsetX;
-            let mousePositionY = mouseTrack.offsetY;
-            dibujarLinea(colorcito, x, y, mousePositionX, mousePositionY, context);
-            x = mousePositionX;
-            y = mousePositionY;
-            cuadrito.addEventListener("mouseup", endDrawing);
-            function endDrawing() 
-            {
-                drawCheck = false;
-            };
-        };
+        let colorcito = "red";
+        let mousePositionX = mouseTrack.offsetX;
+        let mousePositionY = mouseTrack.offsetY;
+        dibujarLinea(colorcito, x, y, mousePositionX, mousePositionY, context);
+        x = mousePositionX;
+        y = mousePositionY;
+        cuadrito.addEventListener("mouseup", endDrawing);
     };
+};
+function endDrawing() 
+{
+    drawCheck = false;
 };
 
 //Activa la funcion para dibujar when se apreta una tecla.
